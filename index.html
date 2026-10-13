@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8fc">
+    <title>CareerPilot — Your job search, in one place</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="CareerPilot home">
+          <span class="brand-mark" aria-hidden="true">✳</span>
+          <span>career<span class="brand-accent">pilot</span></span>
+        </a>
+        <p class="sidebar-label">WORKSPACE</p>
+        <nav aria-label="Main navigation">
+          <a class="nav-link active" href="#overview"><span aria-hidden="true">⌂</span> Overview</a>
+          <a class="nav-link" href="#search"><span aria-hidden="true">⌕</span> Find jobs</a>
+          <a class="nav-link" href="#applications"><span aria-hidden="true">▤</span> Applications <span class="nav-count" id="nav-count">0</span></a>
+          <a class="nav-link" href="#profile"><span aria-hidden="true">♙</span> My profile</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="note-icon" aria-hidden="true">✦</span>
+          <strong>Your career, your call.</strong>
+          <p>Review every draft and submit applications yourself on each company's site.</p>
+        </div>
+        <div class="sidebar-footer"><span class="status-dot"></span> Your profile stays local by default</div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+          <button class="profile-chip" type="button" data-target="profile">
+            <span class="avatar" id="avatar-initial">Y</span>
+            <span id="header-name">Your profile</span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </button>
+        </header>
+
+        <section class="welcome-row" id="overview">
+          <div>
+            <p class="eyebrow">YOUR JOB SEARCH, ORGANIZED</p>
+            <h1>Make your next move.</h1>
+            <p class="welcome-copy">Find opportunities, prepare thoughtful applications, and keep every next step in view.</p>
+          </div>
+          <button class="button button-primary" type="button" data-open-job-dialog><span aria-hidden="true">＋</span> Add an opportunity</button>
+        </section>
+
+        <section class="stats-grid" aria-label="Application summary">
+          <article class="stat-card">
+            <div class="stat-top"><span>Saved opportunities</span><span class="stat-icon lavender" aria-hidden="true">▤</span></div>
+            <strong id="stat-total">0</strong>
+            <small>Jobs you're keeping track of</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>In progress</span><span class="stat-icon peach" aria-hidden="true">◷</span></div>
+            <strong id="stat-progress">0</strong>
+            <small>Drafting or ready to apply</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Submitted</span><span class="stat-icon mint" aria-hidden="true">✓</span></div>
+            <strong id="stat-submitted">0</strong>
+            <small>Applications you've marked sent</small>
+          </article>
+        </section>
+
+        <section class="search-panel panel" id="search">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">DISCOVER YOUR NEXT OPPORTUNITY</p>
+              <h2>Find a role that fits</h2>
+              <p>Search the job boards you already use. Save a role here to prepare and track your application.</p>
+            </div>
+            <span class="heading-illustration" aria-hidden="true">⌕</span>
+          </div>
+          <form id="search-form" class="search-form">
+            <label class="field search-field">
+              <span>Job title or keywords</span>
+              <input id="search-role" name="role" placeholder="e.g. Product Designer, Data Analyst" required>
+            </label>
+            <label class="field location-field">
+              <span>Location</span>
+              <input id="search-location" name="location" placeholder="e.g. Remote, New York">
+            </label>
+            <button class="button button-primary search-button" type="submit">Search jobs <span aria-hidden="true">→</span></button>
+          </form>
+          <div class="search-links" id="search-links" hidden aria-live="polite"></div>
+          <div class="search-hint"><span aria-hidden="true">ⓘ</span> Searches open on the job board. CareerPilot doesn't access or submit to company portals.</div>
+        </section>
+
+        <section class="applications-section" id="applications">
+          <div class="list-heading">
+            <div>
+              <p class="eyebrow">YOUR PIPELINE</p>
+              <h2>Applications <span class="heading-count" id="heading-count">0</span></h2>
+            </div>
+            <label class="filter-wrap">
+              <span class="sr-only">Filter applications</span>
+              <select id="status-filter">
+                <option value="all">All applications</option>
+                <option value="saved">Saved</option>
+                <option value="drafting">Drafting</option>
+                <option value="ready">Ready to apply</option>
+                <option value="applied">Applied</option>
+              </select>
+            </label>
+          </div>
+          <div class="application-list" id="application-list"></div>
+          <div class="empty-state" id="empty-state">
+            <div class="empty-art" aria-hidden="true"><span>⌕</span><i></i></div>
+            <h3>Your next opportunity starts here</h3>
+            <p>Search for roles above, then add one to build your application pipeline.</p>
+            <button type="button" class="button button-secondary" data-target="search">Find your first role</button>
+          </div>
+        </section>
+
+        <section class="profile-section panel" id="profile">
+          <div class="section-heading profile-heading">
+            <div>
+              <p class="eyebrow">YOUR DETAILS</p>
+              <h2>Applicant profile</h2>
+              <p>Profile details stay in this browser until you choose to send selected details for an AI draft.</p>
+            </div>
+            <span class="profile-lock" aria-hidden="true">♙</span>
+          </div>
+          <form id="profile-form">
+            <div class="form-grid">
+              <label class="field"><span>Full name</span><input name="name" autocomplete="name" placeholder="Your name"></label>
+              <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+              <label class="field"><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel" placeholder="+1 555 000 0000"></label>
+              <label class="field"><span>Location <small>(optional)</small></span><input name="location" autocomplete="address-level2" placeholder="City, Country or Remote"></label>
+            </div>
+            <label class="field full-field"><span>Professional summary</span><textarea name="summary" rows="3" placeholder="A few sentences about your experience and what you do well."></textarea></label>
+            <label class="field full-field"><span>Skills <small>(separate with commas)</small></span><textarea name="skills" rows="2" placeholder="e.g. project management, Python, customer research"></textarea></label>
+            <label class="field full-field"><span>Experience highlights <small>(optional; use facts you can stand behind)</small></span><textarea name="highlights" rows="3" placeholder="Projects, achievements, or experience you'd like to highlight."></textarea></label>
+            <div class="profile-actions">
+              <span id="profile-message" role="status"></span>
+              <button class="button button-secondary" type="submit">Save profile</button>
+            </div>
+          </form>
+          <div class="ai-settings">
+            <div>
+              <p class="eyebrow">OPTIONAL AI FEATURE</p>
+              <h3>OpenAI writing assistant</h3>
+              <p id="ai-status" role="status">Checking local server…</p>
+            </div>
+            <form id="ai-key-form">
+              <label class="field" for="ai-api-key"><span>OpenAI API key <small>(held in server memory only)</small></span></label>
+              <div class="ai-key-row">
+                <input id="ai-api-key" name="apiKey" type="password" autocomplete="new-password" placeholder="Paste your OpenAI API key" required>
+                <button class="button button-secondary" type="submit">Save for this session</button>
+                <button class="button button-secondary" type="button" id="clear-ai-key">Clear key</button>
+              </div>
+            </form>
+            <p class="ai-privacy">When you generate a draft, your name, professional summary, skills, experience highlights, and the job details are sent to OpenAI for processing. Your email and phone are not sent. OpenAI's data policies and API charges apply. The key is never saved to browser storage or disk by this app.</p>
+          </div>
+        </section>
+
+        <footer class="page-footer">CareerPilot is a personal job-search organizer. Always check each application for accuracy before submitting.</footer>
+      </main>
+    </div>
+
+    <dialog id="job-dialog" class="job-dialog">
+      <form id="job-form" method="dialog">
+        <div class="dialog-heading">
+          <div><p class="eyebrow">ADD TO YOUR PIPELINE</p><h2>Save an opportunity</h2></div>
+          <button class="icon-button" type="button" id="close-dialog" aria-label="Close">×</button>
+        </div>
+        <label class="field"><span>Job title</span><input name="title" required placeholder="e.g. Senior Product Designer"></label>
+        <label class="field"><span>Company</span><input name="company" required placeholder="e.g. Acme Inc."></label>
+        <label class="field"><span>Job posting URL <small>(optional)</small></span><input name="url" type="url" placeholder="https://company.com/careers/job"></label>
+        <label class="field"><span>Job description <small>(optional; paste relevant details)</small></span><textarea name="description" rows="5" placeholder="Role responsibilities, requirements, and anything you want to tailor your draft around."></textarea></label>
+        <p class="dialog-note">Use job and applicant details you trust. Do not include sensitive personal information in the job description.</p>
+        <div class="dialog-actions"><button class="button button-secondary" type="button" id="cancel-dialog">Cancel</button><button class="button button-primary" type="submit">Save opportunity</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="draft-dialog" class="job-dialog draft-dialog">
+      <form id="draft-form" method="dialog">
+        <div class="dialog-heading">
+          <div><p class="eyebrow">APPLICATION DRAFT</p><h2 id="draft-title">Review your draft</h2></div>
+          <button class="icon-button" type="button" id="close-draft" aria-label="Close">×</button>
+        </div>
+        <p class="draft-warning" id="draft-provenance">Local starting point. Review it for accuracy and make it your own before using it.</p>
+        <label class="field"><span>Cover letter draft</span><textarea name="coverLetter" rows="14"></textarea></label>
+        <div class="dialog-actions draft-actions">
+          <button class="button button-primary" type="button" id="generate-ai-draft">Generate with OpenAI</button>
+          <button class="button button-secondary" type="button" id="copy-draft">Copy draft</button>
+          <button class="button button-secondary" type="button" id="save-draft">Save draft</button>
+          <button class="button button-primary" type="button" id="mark-ready">Mark ready to apply</button>
+        </div>
+        <span id="draft-message" role="status"></span>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
